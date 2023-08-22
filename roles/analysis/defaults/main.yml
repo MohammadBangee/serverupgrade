@@ -1,0 +1,58 @@
+---
+# defaults file for analysis
+analysis_packages_el6:
+  - preupgrade-assistant
+  - preupgrade-assistant-el6toel7
+  - redhat-upgrade-tool
+  - openscap
+  - openscap-engine-sce
+
+analysis_packages_el7:
+  # TODO: Seems to cause package dependency problems with post upgrade cleanup.
+  # - leapp-upgrade-el7toel8
+  # Try this instead.
+  - leapp-upgrade
+
+analysis_packages_el8:
+  # TODO: Seems to cause package dependency problems with post upgrade cleanup.
+  # - leapp-upgrade-el8toel9
+  # Try this instead.
+  - leapp-upgrade
+  # TODO: This should be part of inhibitor remediation.
+  # - vdo
+  # TODO: only w/ rhui for aws
+  # - leapp-rhui-aws
+
+analysis_repos_el6:
+  - rhel-6-server-extras-rpms
+  - rhel-6-server-optional-rpms
+
+analysis_repos_el7:
+  - rhel-7-server-extras-rpms
+
+# If defined, leapp_answerfile will be used as the contents of /var/log/leapp/answerfile.
+# leapp_answerfile: |
+#   [remove_pam_pkcs11_module_check]
+#   confirm = True
+
+    #leapp_upgrade_type: satellite
+leapp_upgrade_type: cdn
+# leapp_upgrade_type: rhui
+# TODO: Add support for custom repositories?
+# leapp_upgrade_type: custom
+
+leapp_preupg_opts: "{{ '--no-rhsm' if leapp_upgrade_type == 'rhui' else '' }}"
+
+# Satellite Organization and Activation Keys are required if using Satellite to change content views
+# unless the content view already in use has all required repositories.
+# satellite_organization: Example
+# satellite_activation_key_pre_leapp: rhel{{ ansible_distribution_major_version }}
+# satellite_activation_key_leapp: rhel{{ ansible_distribution_major_version }}_leapp
+
+leapp_repos_enabled: []
+# leapp_repos_enabled:
+#   - satellite-client-6-for-rhel-{{ ansible_distribution_major_version | int + 1 }}-x86_64-rpms
+
+post_reboot_delay: 120
+
+...
