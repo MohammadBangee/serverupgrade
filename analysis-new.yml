@@ -11,12 +11,12 @@
           #satellite_activation_key_pre_leapp: 'MY_ACTIVATION_KEY_PRE'
           #satellite_activation_key_leapp: 'MY_ACTIVATION_KEY'
           #analysis_repos_el7: copr:copr.fedorainfracloud.org:group_oamg:leapp
-    leapp_preupg_opts: '--target 9.2'
+    leapp_preupg_opts: '--target {{ target }}"'
     leapp_answerfile: |
       [remove_pam_pkcs11_module_check]
       confirm = True
   tasks:
     - name: Generate preupgrade analysis report
       ansible.builtin.import_role:
-        name: roles/analysis
+        name: analysis
 ...
