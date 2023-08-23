@@ -26,10 +26,3 @@ Logs will accumulate in the directory referenced by logfile, with a suffixed dat
 If a log file exists during execution of this role (without suffixed datestamp), execution will terminate as there is an analysis job running already.
 
 Logs will not survive a rollback. They need to be removed off the system prior to a snapshot revert.
-
-# Authors
-Bob Mader, Scott Vick, Mike Savage, Jeffrey Cutter, David Danielsson
-
-# License
-
-MIT
